@@ -1,26 +1,11 @@
-"use client";
 
+
+import { getallCars } from "@/lib/func";
+import { ArrowRight } from "@gravity-ui/icons";
 import Image from "next/image";
 
-// Demo data — replace with API call later
-const fleetCars = [
-  {
-    id: 1,
-    name: "VANTAGE GT",
-    tag: "V8",
-    rate: "$450.00",
-    specs: "V8 / 503 HP",
-    image: "https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=600&q=80",
-  },
-  {
-    id: 2,
-    name: "DEFENDER X",
-    tag: "V6T",
-    rate: "$308.00",
-    specs: "I6 / 395 HP",
-    image: "https://images.unsplash.com/photo-1519641471654-76ce0107ad1b?w=600&q=80",
-  },
-];
+
+
 
 const steps = [
   {
@@ -40,31 +25,34 @@ const steps = [
   },
 ];
 
-const MainDisplay = () => {
+const MainDisplay = async() => {
+  const data= await getallCars()
+
     return (
           <>
       {/* HERO */}
-      <section className="max-w-7xl mx-auto px-6 pt-16 pb-12 grid md:grid-cols-2 gap-10 items-center">
+      <section className= " mx-auto px-30 pt-16 md:pt-36 pb-12 grid md:grid-cols-2 gap-10 items-center justify-item-center border-b-2 border-black">
         <div>
-          <h1 className="text-5xl font-bold leading-tight tracking-tight">
+          <h1 className="text-8xl font-bold leading-tight tracking-tight">
             DRIVE YOUR
             <br />
             AMBITION
           </h1>
-          <p className="text-sm text-gray-500 mt-4 max-w-sm">
+          <p className="text-xl text-gray-500 mt-4 max-w-sm">
             The definitive fleet for the uncompromising professional. Brutal
             performance wrapped in architectural precision. No fluff, just
             machines built to dominate the road.
           </p>
-          <button className="mt-6 bg-black text-white text-xs font-medium tracking-wide px-5 py-3 rounded-md hover:bg-gray-800">
-            EXPLORE FLEET →
+          <button className="mt-6 bg-black text-white text-xs font-medium tracking-wide px-10 py-6 rounded-md flex">
+            EXPLORE FLEET <ArrowRight></ArrowRight>
           </button>
         </div>
-        <div className="relative w-full h-80 rounded-lg overflow-hidden">
+        <div className="relative w-full h-120 rounded-lg overflow-hidden">
           <Image
             src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80"
             alt="Sports car in architectural garage"
-            fill
+            width={600}
+            height={200}
             className="object-cover"
             priority
           />
@@ -72,64 +60,55 @@ const MainDisplay = () => {
       </section>
 
       {/* THE FLEET */}
-      <section className="max-w-7xl mx-auto px-6 py-12 border-t border-gray-200">
-        <div className="flex items-center justify-between mb-8">
-          <h2 className="text-lg font-bold tracking-wide flex items-center gap-2">
-            <span className="w-1 h-5 bg-black inline-block" />
-            THE FLEET
-          </h2>
-          <span className="text-xs text-gray-400">
-            06 AVAILABLE / 2024 COLLECTION
-          </span>
-        </div>
+      {/* THE FLEET */}
+<section className="w-4/5 mx-auto px-6 py-20    border-t border-gray-200">
+  <div className="flex items-center justify-between mb-8">
+    <h2 className="text-3xl font-bold tracking-wide flex items-center gap-2">
+      <span className="w-1 h-5 bg-black inline-block" />
+      THE FLEET
+    </h2>
+    <span className="text-xs text-gray-400">
+      06 AVAILABLE / 2024 COLLECTION
+    </span>
+  </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {fleetCars.map((car) => (
-            <div
-              key={car.id}
-              className="border border-gray-200 rounded-lg overflow-hidden"
-            >
-              <div className="relative h-40 w-full">
-                <Image
-                  src={car.image}
-                  alt={car.name}
-                  fill
-                  className="object-cover"
-                />
-              </div>
-              <div className="p-4">
-                <div className="flex items-center justify-between mb-2">
-                  <h3 className="font-bold text-sm">{car.name}</h3>
-                  <span className="text-[10px] bg-gray-100 px-2 py-1 rounded font-medium">
-                    {car.tag}
-                  </span>
-                </div>
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-1">
-                  <span>DAILY RATE</span>
-                  <span className="font-semibold text-black">{car.rate}</span>
-                </div>
-                <div className="flex items-center justify-between text-xs text-gray-500 mb-4">
-                  <span>SPECS</span>
-                  <span>{car.specs}</span>
-                </div>
-                <button className="w-full border border-black text-xs font-medium py-2 rounded-md hover:bg-black hover:text-white transition">
-                  VIEW DETAILS
-                </button>
-              </div>
-            </div>
-          ))}
-
-          {/* Placeholder slots for remaining cards from API */}
-          {Array.from({ length: 4 }).map((_, i) => (
-            <div
-              key={`placeholder-${i}`}
-              className="border border-dashed border-gray-300 rounded-lg h-64 flex items-center justify-center text-xs text-gray-400"
-            >
-              More cars from API
-            </div>
-          ))}
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+    {data.map((car) => (
+      <div 
+        key={car.id}
+        className="border-2 border-black rounded-lg overflow-hidden"
+      >
+        <div className="relative h-56 w-full ">
+          <Image
+            src={car.image}
+            alt={car.name}
+            fill
+            className="object-cover"
+          />
         </div>
-      </section>
+        <div className="p-5">
+          <div className="flex items-center justify-between mb-3">
+            <h3 className="font-bold text-base">{car.name}</h3>
+            <span className="text-xs bg-gray-100 px-2 py-1 rounded font-medium">
+              {car.tag}
+            </span>
+          </div>
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-1">
+            <span>DAILY RATE</span>
+            <span className="font-semibold text-black">{car.rate}</span>
+          </div>
+          <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
+            <span>SPECS</span>
+            <span>{car.specs}</span>
+          </div>
+          <button className="w-full border-2 border-black text-sm font-medium py-2.5 rounded-md hover:bg-black hover:text-white transition">
+            VIEW DETAILS
+          </button>
+        </div>
+      </div>
+    ))}
+  </div>
+</section>
 
       {/* THREE STEPS */}
       <section className="bg-black text-white py-20">

@@ -35,7 +35,7 @@ export default function RootLayout({ children }) {
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} ${georama.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col font-[family-name:var(--font-georama)]">
+      <body className="min-h-full flex flex-col font-[family-name:var(--font-georama)]" suppressHydrationWarning>
         <Navbar></Navbar>
         {children}
         </body>

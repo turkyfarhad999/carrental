@@ -14,7 +14,7 @@ export default function Navbar() {
   const pathname = usePathname();
 
   return (
-    <nav className="w-full border-b border-gray-200">
+    <nav className="w-full border-b-2 border-black">
       <div className="max-w-7xl mx-auto flex items-center justify-between px-6 py-4">
         {/* Logo */}
         <Link href={'/'} className="text-xl font-bold tracking-wide">DRIVEFLEET</Link>
