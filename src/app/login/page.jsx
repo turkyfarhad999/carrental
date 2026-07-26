@@ -24,6 +24,11 @@ const LoginPage = () => {
   router.push('/')
   router.refresh()
     }
+    const signIn = async () => {
+  const data = await authClient.signIn.social({
+    provider: "google",
+  });
+};
 
   return (
     <div className="min-h-screen grid md:grid-cols-2">
@@ -138,7 +143,7 @@ const LoginPage = () => {
             <div className="flex-1 h-px bg-gray-200" />
           </div>
 
-          <button className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2.5 text-sm font-medium hover:bg-gray-50 transition">
+          <button onClick={signIn} className="w-full flex items-center justify-center gap-2 border border-gray-300 rounded-md py-2.5 text-sm font-medium hover:bg-gray-50 transition cursor-pointer">
             <svg width="16" height="16" viewBox="0 0 24 24">
               <path
                 fill="#4285F4"
