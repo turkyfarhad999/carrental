@@ -1,11 +1,25 @@
 
 
 import { getallCars } from "@/lib/func";
-import { ArrowRight } from "@gravity-ui/icons";
+import { ArrowRight, Gear } from "@gravity-ui/icons";
 import Image from "next/image";
 
 
-
+// _id": "6a6364144bcc744ff224b679",
+// "id": 7,
+// "name": "Toyota Corolla",
+// "type": "Sedan",
+// "location": "Kolatoli, Cox's Bazar",
+// "seats": 5,
+// "price": 3000,
+// "image": "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?w=700&q=80",
+// "status": "Available",
+// "transmission": "Automatic",
+// "fuel": "Petrol",
+// "bookingCount": 23,
+// "description": "A dependable beach-town companion — easy to park, easy to drive, with plenty of boot space for luggage.",
+// "ownerEmail": "farhana.akter@example.com",
+// "createdAt": "2026-05-29T13:50:00Z"
 
 const steps = [
   {
@@ -61,46 +75,67 @@ const MainDisplay = async() => {
 
       {/* THE FLEET */}
       {/* THE FLEET */}
-<section className="w-4/5 mx-auto px-6 py-20    border-t border-gray-200">
+<section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-20 border-t border-gray-200">
   <div className="flex items-center justify-between mb-8">
     <h2 className="text-3xl font-bold tracking-wide flex items-center gap-2">
       <span className="w-1 h-5 bg-black inline-block" />
       THE FLEET
     </h2>
     <span className="text-xs text-gray-400">
-      06 AVAILABLE / 2024 COLLECTION
+      {data.length} / 2024 COLLECTION
     </span>
   </div>
 
-  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-    {data.map((car) => (
+  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
+    {data.slice(0, 4).map((car) => (
       <div 
         key={car.id}
-        className="border-2 border-black rounded-lg overflow-hidden"
+        className="border-2 border-black rounded-lg overflow-hidden flex flex-col justify-between"
       >
-        <div className="relative h-56 w-full ">
-          <Image
-            src={car.image}
-            alt={car.name}
-            fill
-            className="object-cover"
-          />
+        <div>
+          {/* Image Container */}
+          <div className="relative h-56 w-full">
+            <Image
+              src={car.image}
+              alt={car.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Details Content */}
+          <div className="p-5">
+            {/* Tag / Status Badge */}
+            {car.tag && (
+              <div className="mb-2">
+                <span className="text-xs bg-gray-100 border border-gray-200 px-2 py-0.5 rounded font-medium inline-block">
+                  {car.tag}
+                </span>
+              </div>
+            )}
+
+            {/* Name & Price Row */}
+            <div className="flex items-center justify-between gap-3 mb-4">
+              <h3 className="font-bold text-xl md:text-2xl truncate">{car.name}</h3>
+              <h3 className="font-bold text-2xl text-right  whitespace-nowrap">
+                {car.price} Taka<span className="  font-normal">/Day </span>
+              </h3>
+            </div>
+
+            {/* Spec Rates */}
+            <div className="flex items-center justify-between text-sm mb-1">
+              <span className="flex gap-1.5 font-semibold text-2xl items-center justify-center "><Gear></Gear>{car.transmission}</span>
+              
+            </div>
+            <div className="flex items-center justify-between font-semibold mb-5">
+              <span>Availability</span>
+              <span className="font-medium text-black">{car.status}</span>
+            </div>
+          </div>
         </div>
-        <div className="p-5">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-bold text-base">{car.name}</h3>
-            <span className="text-xs bg-gray-100 px-2 py-1 rounded font-medium">
-              {car.tag}
-            </span>
-          </div>
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-1">
-            <span>DAILY RATE</span>
-            <span className="font-semibold text-black">{car.rate}</span>
-          </div>
-          <div className="flex items-center justify-between text-sm text-gray-500 mb-5">
-            <span>SPECS</span>
-            <span>{car.specs}</span>
-          </div>
+
+        {/* Action Button */}
+        <div className="px-5 pb-5">
           <button className="w-full border-2 border-black text-sm font-medium py-2.5 rounded-md hover:bg-black hover:text-white transition">
             VIEW DETAILS
           </button>
@@ -111,7 +146,7 @@ const MainDisplay = async() => {
 </section>
 
       {/* THREE STEPS */}
-      <section className="bg-black text-white py-20">
+      <section className="bg-black text-white py-20 rounded-2xl">
         <div className="max-w-7xl mx-auto px-6">
           <h2 className="text-center text-xl font-bold tracking-widest mb-16">
             THREE STEPS

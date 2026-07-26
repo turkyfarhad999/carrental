@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Georama, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/Componnet/Navbar/Navbar";
+import Footer from "@/Componnet/Footer/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -38,6 +39,7 @@ export default function RootLayout({ children }) {
       <body className="min-h-full flex flex-col font-[family-name:var(--font-georama)]" suppressHydrationWarning>
         <Navbar></Navbar>
         {children}
+        <Footer></Footer>
         </body>
     </html>
   );
