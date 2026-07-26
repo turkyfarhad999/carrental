@@ -1,13 +1,29 @@
+import SearchBar from '@/Componnet/Searchbar/Searchbar';
+import SortSelect from '@/Componnet/Searchbar/SortSelect';
 import { getallCars } from '@/lib/func';
 import { ArrowRight, Gear } from "@gravity-ui/icons";
 import Image from "next/image";
+import Link from 'next/link';
 
 import React from 'react';
 
-const page = async() => {
-    const data=await getallCars()
+const page = async({searchParams}) => {
+    const resolvedParams = await searchParams;
+    const data=await getallCars(resolvedParams)
     return (
        <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-20 border-t border-gray-200">
+        <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+        <h2 className="text-3xl font-bold tracking-wide flex items-center gap-2">
+          <span className="w-1 h-5 bg-black inline-block" />
+          THE FLEET
+        </h2>
+
+        {/* Search & Sort Controls */}
+        <div className="flex items-center gap-3">
+          <SearchBar></SearchBar>
+          <SortSelect />
+        </div>
+      </div>
   <div className="flex items-center justify-between mb-8">
     <h2 className="text-3xl font-bold tracking-wide flex items-center gap-2">
       <span className="w-1 h-5 bg-black inline-block" />
@@ -67,10 +83,10 @@ const page = async() => {
         </div>
 
         {/* Action Button */}
-        <div className="px-5 pb-5">
-          <button className="w-full border-2 border-black text-sm font-medium py-2.5 rounded-md hover:bg-black hover:text-white transition">
+        <div className=" w-full px-5 pb-5">
+          <Link href={`/allcars/${car._id}`} className="block text-center w-full border-2 border-black text-sm font-medium py-2.5 rounded-md hover:bg-black hover:text-white transition">
             VIEW DETAILS
-          </button>
+          </Link>
         </div>
       </div>
     ))}
