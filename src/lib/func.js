@@ -21,3 +21,29 @@ export const getCarById = async (id) => {
   if (!res.ok) return null;
   return await res.json();
 };
+export const postAcar=async(carData)=>{
+    const res = await fetch('http://localhost:8000/cars',{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json"
+      },
+      body:JSON.stringify(carData)
+    })
+}
+export const getMyCars = async (email) => {
+  const res = await fetch(`http://localhost:8000/cars?ownerEmail=${email}`); 
+  return await res.json();
+};
+export const getBookedCars = async (email) => {
+  const res = await fetch(`http://localhost:8000/booked-cars?ownerEmail=${email}`); 
+  return await res.json();
+};
+export const addBookedCars=async(carData)=>{
+  const res= await fetch('http://localhost:8000/booked-cars',{
+    method:'POST',
+    headers:{
+      'Content-Type':'application/json'
+    },
+    body:JSON.stringify(carData)
+  })
+}

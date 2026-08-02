@@ -1,14 +1,17 @@
+
 import { getCarById } from "@/lib/func";
 import { Gear, ArrowLeft } from "@gravity-ui/icons";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import Addcarbtn from "./Addcarbtn";
 
 const page = async ({ params }) => {
   const { id } = await params;
   const car = await getCarById(id);
 
   if (!car) return notFound();
+ 
 
   return (
     <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-16">
@@ -94,9 +97,7 @@ const page = async ({ params }) => {
           </p>
 
           {/* CTA */}
-          <button className="w-full bg-black text-white text-sm font-medium py-3 rounded-md hover:bg-gray-800 transition">
-            BOOK THIS CAR
-          </button>
+          <Addcarbtn car={car}></Addcarbtn>
         </div>
       </div>
     </section>

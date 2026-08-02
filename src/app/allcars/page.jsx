@@ -24,20 +24,12 @@ const page = async({searchParams}) => {
           <SortSelect />
         </div>
       </div>
-  <div className="flex items-center justify-between mb-8">
-    <h2 className="text-3xl font-bold tracking-wide flex items-center gap-2">
-      <span className="w-1 h-5 bg-black inline-block" />
-      THE FLEET
-    </h2>
-    <span className="text-xs text-gray-400">
-      {data.length} / 2024 COLLECTION
-    </span>
-  </div>
+
 
   <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-8">
     {data.map((car) => (
       <div 
-        key={car.id}
+        key={car._id}
         className="border-2 border-black rounded-lg overflow-hidden flex flex-col justify-between"
       >
         <div>

@@ -9,8 +9,8 @@ import { Person, ArrowUpRightFromSquare } from "@gravity-ui/icons";
 const navLinks = [
   { name: "Home", href: "/" },
   { name: "Explore Cars", href: "/allcars" },
-  { name: "Add Car", href: "/add-car" },
-  { name: "My Bookings", href: "/my-bookings" },
+  { name: "Add Car", href: "/add-cars" },
+  { name: "My Bookings", href: "/booked-cars" },
 ];
 
 export default function Navbar() {
