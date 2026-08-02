@@ -14,6 +14,7 @@ const BookedCarsPage = async () => {
   }
 
   const bookedCars = await getBookedCars(session.user.email);
+  console.log(bookedCars)
 
   return (
     <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-20">

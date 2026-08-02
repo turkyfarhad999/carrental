@@ -34,8 +34,8 @@ export const getMyCars = async (email) => {
   const res = await fetch(`http://localhost:8000/cars?ownerEmail=${email}`); 
   return await res.json();
 };
-export const getBookedCars = async (email) => {
-  const res = await fetch(`http://localhost:8000/booked-cars?ownerEmail=${email}`); 
+export const getBookedCars = async (userEmail) => {
+  const res = await fetch(`http://localhost:8000/booked-cars?userEmail=${userEmail}`); 
   return await res.json();
 };
 export const addBookedCars=async(carData)=>{
