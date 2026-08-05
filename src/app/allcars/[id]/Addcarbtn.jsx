@@ -1,20 +1,26 @@
 'use client'
-import { addBookedCars } from '@/lib/func';
+import { addBookedCars, updateCar } from '@/lib/func';
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 const Addcarbtn = ({car}) => {
+  const router=useRouter()
      const [loading, setLoading] = useState(false);
-    const handleAdd=()=>{
+     const isBooked = car.status !== "Available";
+    const handleAdd=async()=>{
   
-  addBookedCars(car)
+      const updatecar=await updateCar(car._id)
+  await addBookedCars(updatecar)
+  router.refresh()
+  console.log(car.status)
 
  }
     return (
         <div>
             <button 
-            disabled={loading}
+            disabled={car.status==='booked'}
             onClick={handleAdd} className="w-full bg-black text-white text-sm font-medium py-3 rounded-md hover:bg-gray-800 transition">
-            BOOK THIS CAR
+            {car.status==="Available"?"Book this Car":"Already Booked"}
           </button>
         </div>
     );

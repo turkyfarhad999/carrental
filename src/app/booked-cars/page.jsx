@@ -3,6 +3,8 @@ import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 import { getBookedCars } from "@/lib/func";
 import Image from "next/image";
+import { Button } from "@heroui/react";
+import DeleteFromBooked from "./DeleteFromBooked";
 
 const BookedCarsPage = async () => {
   const session = await auth.api.getSession({
@@ -56,7 +58,7 @@ const BookedCarsPage = async () => {
                     {booking.name || booking.carName}
                   </h3>
                   <p className="text-sm text-gray-500">
-                    Booked by: {booking.renterEmail || booking.userEmail || booking.customerEmail}
+                    Booked by: {session.user.name || booking.userEmail || booking.customerEmail}
                   </p>
                   {(booking.startDate || booking.endDate) && (
                     <p className="text-sm text-gray-500">
@@ -69,7 +71,7 @@ const BookedCarsPage = async () => {
                   {booking.status && (
                     <span
                       className={`text-xs font-semibold px-3 py-1 rounded-full ${
-                        booking.status === "Confirmed"
+                        booking.status === "booked"
                           ? "bg-black text-white"
                           : "bg-gray-100 border border-gray-300"
                       }`}
@@ -83,6 +85,7 @@ const BookedCarsPage = async () => {
                       <span className="text-xs font-normal">/day</span>
                     </span>
                   )}
+                 <DeleteFromBooked></DeleteFromBooked>
                 </div>
               </div>
             </div>

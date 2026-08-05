@@ -5,6 +5,7 @@ import { getMyCars } from "@/lib/func";
 import Image from "next/image";
 import Link from "next/link";
 import { Gear } from "@gravity-ui/icons";
+import Deletefromcars from "./Deletefromcars";
 const MyCarsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
@@ -103,7 +104,7 @@ const MyCarsPage = async () => {
                 >
                   VIEW
                 </Link>
-        Delete
+                  <Deletefromcars carId={car}></Deletefromcars>
               </div>
             </div>
           ))}

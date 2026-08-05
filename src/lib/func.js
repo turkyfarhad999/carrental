@@ -1,3 +1,5 @@
+import { methods } from "better-auth/react";
+
 export const getallCars = async (params = {}) => {
   const query = new URLSearchParams();
 
@@ -46,4 +48,53 @@ export const addBookedCars=async(carData)=>{
     },
     body:JSON.stringify(carData)
   })
+}
+export const updateCar=async(id,updateData = { status: "booked" })=>{
+   const res = await fetch(`http://localhost:8000/cars/${id}`,
+    {method:'PATCH',
+      headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updateData)
+    },
+    
+   )
+   const data=await res.json()
+   return data;
+
+}
+//deletecars
+export const deleteCarsFromAllcars =async(id)=>{
+  const res=await fetch(`http://localhost:8000/cars/${id}`,{
+    method:'DELETE'
+  }
+)
+const data = await res.json()
+return data
+
+
+}
+export const deleteCarsFromBookedcars =async(id)=>{
+  const res=await fetch(`http://localhost:8000/booked-cars/${id}`,{
+    method:'DELETE'
+  }
+)
+const data = await res.json()
+return data
+
+
+}
+export const updateBookCar=async(id,updateData = { status: "Available" })=>{
+   const res = await fetch(`http://localhost:8000/booked-cars/${id}`,
+    {method:'PATCH',
+      headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(updateData)
+    },
+    
+   )
+   const data=await res.json()
+   return data;
+
 }
