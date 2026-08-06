@@ -5,8 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import Addcarbtn from "./Addcarbtn";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
 const page = async ({ params }) => {
+  const session=await auth.api.getSession({
+    headers:await headers()
+  })
+  console.log(session)
   const { id } = await params;
   const car = await getCarById(id);
 
@@ -97,7 +103,7 @@ const page = async ({ params }) => {
           </p>
 
           {/* CTA */}
-          <Addcarbtn car={car}></Addcarbtn>
+          <Addcarbtn car={car} userEmail={session?.user?.email}></Addcarbtn>
         </div>
       </div>
     </section>

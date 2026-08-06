@@ -85,7 +85,7 @@ const BookedCarsPage = async () => {
                       <span className="text-xs font-normal">/day</span>
                     </span>
                   )}
-                 <DeleteFromBooked></DeleteFromBooked>
+                 <DeleteFromBooked booking={booking}></DeleteFromBooked>
                 </div>
               </div>
             </div>
