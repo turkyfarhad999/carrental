@@ -25,7 +25,7 @@
     console.log(bookedCars)
 
     return (
-      <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-20">
+      <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-4 py-20">
         <h2 className="text-3xl font-bold tracking-wide flex items-center gap-2 mb-2">
           <span className="w-1 h-5 bg-black inline-block" />
           BOOKED CARS
@@ -73,7 +73,7 @@
                     )}
                   </div>
 
-                  <div className="flex items-center gap-4">
+                  <div className="flex items-center gap-1 md:gap-4">
                     {booking.status && (
                       <span
                         className={`text-xs font-semibold px-3 py-1 rounded-full ${
