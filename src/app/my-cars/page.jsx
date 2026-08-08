@@ -10,12 +10,15 @@ const MyCarsPage = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
-
+  const {token}=await auth.api.getToken({
+    headers: await headers(),
+  })
+  console.log("token from mycar ",token)
   if (!session?.user) {
     redirect("/login");
   }
 
-  const myCars = await getMyCars(session.user.email);
+  const myCars = await getMyCars(session.user.email,token);
 
   return (
     <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-20">
@@ -104,7 +107,7 @@ const MyCarsPage = async () => {
                 >
                   VIEW
                 </Link>
-                  <Deletefromcars carId={car}></Deletefromcars>
+                  <Deletefromcars token={token} carId={car}></Deletefromcars>
               </div>
             </div>
           ))}

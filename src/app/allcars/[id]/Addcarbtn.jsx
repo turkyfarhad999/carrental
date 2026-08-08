@@ -1,18 +1,23 @@
 'use client'
+import { authClient } from '@/lib/auth-client';
 import { addBookedCars, updateCar } from '@/lib/func';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-const Addcarbtn = ({car,userEmail}) => {
+const Addcarbtn = ({car,userEmail,token}) => {
+
   const router=useRouter()
      const [loading, setLoading] = useState(false);
+     
      const isBooked = car.status !== "Available";
     const handleAdd=async()=>{
          if(!userEmail){
           router.push('/login')
           return
          }
-      const updatecar=await updateCar(car._id,{bookedBy:userEmail})
+        console.log(token)
+     
+      const updatecar=await updateCar(car._id,{bookedBy:userEmail},token)
       const bookedCar={
         ...updatecar,
         carId:car._id,
@@ -20,7 +25,7 @@ const Addcarbtn = ({car,userEmail}) => {
         bookedBy:userEmail
      
       }
-  await addBookedCars(bookedCar)
+  await addBookedCars(bookedCar,token)
   router.refresh()
   console.log(car.status)
 

@@ -4,7 +4,7 @@ import { AlertDialog, Button } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
-const DeleteFromBooked = ({ booking }) => {  // ✅ destructure করো
+const DeleteFromBooked = ({ booking ,token}) => {  // ✅ destructure করো
   const router = useRouter();
   const [loading, setLoading] = useState(false);
 
@@ -17,7 +17,7 @@ const DeleteFromBooked = ({ booking }) => {  // ✅ destructure করো
         alert("Booking ID not found!");
         return;
       }
-      await deleteCarsFromBookedcars(booking._id);
+      await deleteCarsFromBookedcars(booking._id,token);
       router.refresh();
     } catch (error) {
       console.error("Error:", error);

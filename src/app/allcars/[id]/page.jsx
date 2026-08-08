@@ -12,9 +12,13 @@ const page = async ({ params }) => {
   const session=await auth.api.getSession({
     headers:await headers()
   })
+  const {token}=await auth.api.getToken({
+    headers:await headers()
+  })
+  console.log("from id ",token)
   console.log(session)
   const { id } = await params;
-  const car = await getCarById(id);
+  const car = await getCarById(id,token);
 
   if (!car) return notFound();
  
@@ -103,7 +107,7 @@ const page = async ({ params }) => {
           </p>
 
           {/* CTA */}
-          <Addcarbtn car={car} userEmail={session?.user?.email}></Addcarbtn>
+          <Addcarbtn car={car} userEmail={session?.user?.email} token={token}></Addcarbtn>
         </div>
       </div>
     </section>

@@ -1,15 +1,21 @@
 import SearchBar from '@/Componnet/Searchbar/Searchbar';
 import SortSelect from '@/Componnet/Searchbar/SortSelect';
+import { auth } from '@/lib/auth';
 import { getallCars } from '@/lib/func';
 import { ArrowRight, Gear } from "@gravity-ui/icons";
+import { headers } from 'next/headers';
 import Image from "next/image";
 import Link from 'next/link';
 
 import React from 'react';
 
 const page = async({searchParams}) => {
+    const {token}=await auth.api.getToken({
+        headers: await headers()
+       })
+       console.log("from all car",token)
     const resolvedParams = await searchParams;
-    const data=await getallCars(resolvedParams)
+    const data=await getallCars(resolvedParams,token)
     return (
        <section className="w-11/12 md:w-4/5 lg:w-3/5 mx-auto px-6 py-20 border-t border-gray-200">
         <div className="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">

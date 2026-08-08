@@ -4,11 +4,11 @@ import {AlertDialog, Button } from '@heroui/react';
 import { useRouter } from 'next/navigation';
 import React from 'react';
 
-const Deletefromcars = ({carId}) => {
+const Deletefromcars = ({carId,token}) => {
     const router=useRouter()
     console.log(carId)
-    const handleClick=()=>{
-     deleteCarsFromAllcars(carId._id)
+    const handleClick=async()=>{
+     await deleteCarsFromAllcars(carId._id,token)
      router.refresh()
     }
     return (
