@@ -1,6 +1,7 @@
 "use client";
 
 import { authClient } from "@/lib/auth-client";
+import { postAcar } from "@/lib/func";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -10,9 +11,11 @@ const AddCarPage = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    const {data: token}= await authClient.token();
+  console.log(token)
     if (!session?.user?.email) {
       setError("Please log in to add a car.");
       return;
@@ -35,21 +38,22 @@ const AddCarPage = () => {
     };
 
     try {
-      const res = await fetch("http://localhost:8000/cars", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(carData),
-      });
+  const { data: tokenData } = await authClient.token();
+  const token = tokenData?.token;
 
-      if (!res.ok) throw new Error("Failed to add car");
+  if (!token) {
+    throw new Error("Session expired, please log in again.");
+  }
 
-      router.push("/my-cars");
-      router.refresh();
-    } catch (err) {
-      setError(err.message);
-    } finally {
-      setLoading(false);
-    }
+  await postAcar(carData, token); // await add, token pass, res.ok check REMOVE
+
+  router.push("/my-cars");
+  router.refresh();
+} catch (err) {
+  setError(err.message);
+} finally {
+  setLoading(false);
+}
   };
 
   if (isPending) {

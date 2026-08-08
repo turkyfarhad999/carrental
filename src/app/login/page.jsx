@@ -5,6 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import toast from "react-hot-toast";
 
 const LoginPage = () => {
     const router=useRouter()
@@ -21,6 +22,7 @@ const LoginPage = () => {
       
       
   });
+  toast('Sucessfully login')
   router.push('/')
   router.refresh()
     }

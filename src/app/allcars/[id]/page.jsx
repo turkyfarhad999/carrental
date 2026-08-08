@@ -9,16 +9,28 @@ import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
 
 const page = async ({ params }) => {
-  const session=await auth.api.getSession({
-    headers:await headers()
-  })
-  const {token}=await auth.api.getToken({
-    headers:await headers()
-  })
-  console.log("from id ",token)
-  console.log(session)
+  let session = null;  
+let token = null;
+  try {
+    session = await auth.api.getSession({
+      headers: await headers()
+    });
+  } catch (err) {
+    console.log("no session, guest user");
+  }
+
+  try {
+    const result = await auth.api.getToken({
+      headers: await headers()
+    });
+    token = result?.token || null;
+  } catch (err) {
+    console.log("no token, guest user");
+  }
+  
+  
   const { id } = await params;
-  const car = await getCarById(id,token);
+  const car = await getCarById(id);
 
   if (!car) return notFound();
  

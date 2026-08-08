@@ -1,14 +1,26 @@
-import { error } from "better-auth/api";
-import { authClient } from "./auth-client";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
 
-export const getToken = async () => {
+export async function getAuthToken() {
   try {
-    const session = await authClient.getSession()
-    console.log("Session:", session)  // দেখো এখানে কি আছে
-    console.log("Token:", session?.token)  // Token এখানে থাকবে
-    return session?.token || null
-  } catch (error) {
-    console.error("Token fetch error:", error)
-    return null
+    const { token } = await auth.api.getToken({
+      headers: await headers(),
+    });
+    return token || null;
+  } catch (err) {
+    console.error("getAuthToken: no active session");
+    return null;
+  }
+}
+
+export async function getAuthSession() {
+  try {
+    const session = await auth.api.getSession({
+      headers: await headers(),
+    });
+    return session;
+  } catch (err) {
+    console.error("getAuthSession: no active session");
+    return null;
   }
 }

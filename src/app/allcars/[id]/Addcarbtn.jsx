@@ -3,6 +3,7 @@ import { authClient } from '@/lib/auth-client';
 import { addBookedCars, updateCar } from '@/lib/func';
 import { redirect, useRouter } from 'next/navigation';
 import React, { useState } from 'react';
+import toast from 'react-hot-toast';
 
 const Addcarbtn = ({car,userEmail,token}) => {
 
@@ -26,6 +27,7 @@ const Addcarbtn = ({car,userEmail,token}) => {
      
       }
   await addBookedCars(bookedCar,token)
+  toast('Car added to the booked-cars List')
   router.refresh()
   console.log(car.status)
 

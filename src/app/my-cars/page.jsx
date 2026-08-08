@@ -34,7 +34,7 @@ const MyCarsPage = async () => {
         </div>
 
         <Link
-          href="/add-car"
+          href="/add-cars"
           className="bg-black text-white text-sm font-medium px-5 py-2.5 rounded-md hover:bg-gray-800 transition"
         >
           + ADD CAR

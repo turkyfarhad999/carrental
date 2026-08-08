@@ -1,8 +1,7 @@
-import { auth } from "@/lib/auth";
 import { getallCars } from "@/lib/func";
 import { ArrowRight, Gear } from "@gravity-ui/icons";
-import { headers } from "next/headers";
 import Image from "next/image";
+import Link from "next/link";
 
 const steps = [
   {
@@ -22,12 +21,8 @@ const steps = [
   },
 ];
 
-const MainDisplay = async() => {
-  const {token}=await auth.api.getToken({
-    headers: await headers()
-  })
-  console.log(token)
-  const data = await getallCars({},token);
+const MainDisplay = async () => {
+  const data = await getallCars({});
 
   return (
     <>
@@ -45,11 +40,11 @@ const MainDisplay = async() => {
             machines built to dominate the road.
           </p>
           <button className="mt-4 sm:mt-6 bg-black text-white text-xs sm:text-sm font-medium tracking-wide px-6 sm:px-8 md:px-10 py-3 sm:py-4 md:py-6 rounded-md hover:bg-gray-800 transition flex items-center gap-2 w-fit">
-            EXPLORE FLEET 
+            EXPLORE FLEET
             <ArrowRight width={16} height={16} />
           </button>
         </div>
-        
+
         <div className="relative w-full h-40 sm:h-60 md:h-80 lg:h-96 rounded-lg overflow-hidden order-first md:order-last">
           <Image
             src="https://images.unsplash.com/photo-1503376780353-7e6692767b70?w=1200&q=80"
@@ -76,7 +71,7 @@ const MainDisplay = async() => {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 md:gap-8">
             {data.slice(0, 4).map((car) => (
-              <div 
+              <div
                 key={car._id || car.id}
                 className="border-2 border-black rounded-lg overflow-hidden flex flex-col justify-between hover:shadow-lg transition"
               >
@@ -106,7 +101,7 @@ const MainDisplay = async() => {
                     <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 mb-3 sm:mb-4">
                       <h3 className="font-bold text-lg sm:text-xl md:text-2xl truncate">{car.name}</h3>
                       <h3 className="font-bold text-lg sm:text-xl md:text-2xl whitespace-nowrap">
-                        {car.price} 
+                        {car.price}
                         <span className="text-sm font-normal">/Day</span>
                       </h3>
                     </div>
@@ -118,7 +113,7 @@ const MainDisplay = async() => {
                         {car.transmission}
                       </span>
                     </div>
-                    
+
                     <div className="flex items-center justify-between font-semibold mb-4 sm:mb-5">
                       <span className="text-sm sm:text-base">Availability</span>
                       <span className="font-medium text-black text-sm sm:text-base">{car.status}</span>
@@ -128,9 +123,9 @@ const MainDisplay = async() => {
 
                 {/* Action Button */}
                 <div className="px-3 sm:px-4 md:px-5 pb-3 sm:pb-4 md:pb-5">
-                  <button className="w-full border-2 border-black text-xs sm:text-sm font-medium py-2 sm:py-2.5 rounded-md hover:bg-black hover:text-white transition">
+                  <Link href={`/allcars/${car._id}`} className=" block  text-center w-full border-2 border-black text-xs sm:text-sm font-medium py-2 sm:py-2.5 rounded-md hover:bg-black hover:text-white transition">
                     VIEW DETAILS
-                  </button>
+                  </Link>
                 </div>
               </div>
             ))}

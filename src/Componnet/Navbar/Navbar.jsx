@@ -205,7 +205,7 @@ export default function Navbar() {
                     My Cars
                   </Link>
                   <Link
-                    href="/my-bookings"
+                    href="/booked-cars"
                     onClick={() => setMobileMenuOpen(false)}
                     className="block px-2 py-2 text-xs hover:bg-gray-50 rounded transition"
                   >
